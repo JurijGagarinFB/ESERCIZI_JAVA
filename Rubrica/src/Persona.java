@@ -11,4 +11,7 @@ public class Persona {
     public String anagrafica() {
         return String.format("Nome: %s Cognome: %s Telefono: %s Tipo: %s", nome, cognome, numDiTelefono, tipo);
     }
+    public String ricercaSingola() {
+        return String.format("Telefono: %s", numDiTelefono);
+    }
 }
