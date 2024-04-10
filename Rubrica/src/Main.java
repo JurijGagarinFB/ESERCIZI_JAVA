@@ -7,11 +7,12 @@ public class Main { // Definizione della classe Main
         final int nContratti = 3; // Definisce il numero massimo di contratti
         Scanner tastiera = new Scanner(System.in); // Crea un oggetto Scanner per leggere l'input da tastiera
         Persona[] gestore = new Persona[nContratti]; // Crea un array di oggetti Persona
-        String[] opzioni = {"Gestore Telefonico", "1 - Inserimento", "2 - Visualizza", "3 - Verifica presenza contatto", "4 - Ricerca numero telefono", "5 - Fine"}; // Array di stringhe contenente le opzioni del menu
+        String[] opzioni = {"Gestore Telefonico", "1 - Inserimento", "2 - Visualizza", "3 - Verifica presenza contatto", "4 - Ricerca numero telefono", "5 - Elimina Contato", "6 - Fine"}; // Array di stringhe contenente le opzioni del menu
 
         boolean fine = false; // Variabile booleana per verificare se il programma deve terminare
         boolean visualizzaSingolo = false;
         int posizione=0;
+        int trovato=0;
 
         int contaContatti = 0; // Contatore per il numero di contatti presenti nell'array
 
@@ -81,7 +82,13 @@ public class Main { // Definizione della classe Main
                         System.out.println("Non ci sono contatti"); // Stampa un messaggio se non ci sono contatti
                     }
                 }
-                case 5 -> fine = true; // Se l'utente sceglie 4, imposta fine a true per terminare il programma
+
+                case 5 -> {
+                    System.out.println("Quale contatto vuoi elimiare?");
+                    trovato=verificaPresenzaContatto(tastiera, gestore, contaContatti);
+                    eliminaContatto(tastiera, gestore, contaContatti, trovato);
+                }
+                case 6 -> fine = true; // Se l'utente sceglie 4, imposta fine a true per terminare il programma
             }
         } while (!fine); // Continua il ciclo finché l'utente non decide di terminare
         System.out.println("Fine programma"); // Stampa un messaggio per indicare la fine del programma
@@ -138,5 +145,12 @@ public class Main { // Definizione della classe Main
         }
 
         return -1; // Contatto non presente
+    }
+    public static void eliminaContatto(Scanner tastiera, Persona[] gestore, int contaContatti, int trovato){
+        if (trovato!=-1){
+
+        }else{
+            System.out.println("Contatto non trovato!");
+        }
     }
 }
