@@ -120,7 +120,7 @@ public class Main { // Definizione della classe Main
                 System.out.println(gestore[i].anagrafica()); // Stampa i dettagli di ogni contatto presente
             }
         }else{
-            System.out.println(gestore[posizione].anagrafica()); // Stampa i dettagli di ogni contatto presente
+            System.out.println(gestore[posizione].ricercaSingola()); // Stampa i dettagli di ogni contatto presente
         }
     }
 
