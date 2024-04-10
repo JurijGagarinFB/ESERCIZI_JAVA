@@ -63,22 +63,6 @@ public class Main {
         System.out.println("Fine programma");
     }
 
-    public static boolean contattoPresente(Scanner tastiera, Persona[] gestore, int contaContatti) {
-        System.out.println("Inserisci il nome");
-        String nome = tastiera.nextLine();
-        System.out.println("Inserisci il cognome");
-        String cognome = tastiera.nextLine();
-
-        for (int i = 0; i < contaContatti; i++) {
-            if (gestore[i].nome.equals(nome) && gestore[i].cognome.equals(cognome)) {
-                System.out.println("Contatto già presente");
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     public static Persona LeggiContatto(Scanner tastiera) {
         Persona contatto = new Persona();
 
