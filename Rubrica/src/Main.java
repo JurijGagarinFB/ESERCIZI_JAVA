@@ -7,12 +7,13 @@ public class Main { // Definizione della classe Main
         final int nContratti = 3; // Definisce il numero massimo di contratti
         Scanner tastiera = new Scanner(System.in); // Crea un oggetto Scanner per leggere l'input da tastiera
         Persona[] gestore = new Persona[nContratti]; // Crea un array di oggetti Persona
-        String[] opzioni = {"Gestore Telefonico", "1 - Inserimento", "2 - Visualizza", "3 - Verifica presenza contatto", "4 - Ricerca numero telefono", "5 - Elimina Contato", "6 - Fine"}; // Array di stringhe contenente le opzioni del menu
+        String[] opzioni = {"Gestore Telefonico", "1 - Inserimento", "2 - Visualizza", "3 - Verifica presenza contatto", "4 - Ricerca numero telefono","5 - Modifica Contatto", "6 - Elimina Contato per nome cognome", "7 - Fine"}; // Array di stringhe contenente le opzioni del menu
 
         boolean fine = false; // Variabile booleana per verificare se il programma deve terminare
         boolean visualizzaSingolo = false;
         int posizione=0;
         int trovato=0;
+        String[] tipoC = {"Telefono", "1]abitazione", "2]cellulare", "3]aziendale"};
 
         int contaContatti = 0; // Contatore per il numero di contatti presenti nell'array
 
@@ -84,13 +85,26 @@ public class Main { // Definizione della classe Main
                 }
 
                 case 5 -> {
+                    posizione = verificaPresenzaContatto(tastiera, gestore, contaContatti);
+                    if (posizione != -1) {
+                        switch (menu(tipoC, tastiera)) {
+                            case 1 -> gestore[posizione].tipo = Tipologia.abitazione;
+                            case 2 -> gestore[posizione].tipo = Tipologia.cellulare;
+                            default -> gestore[posizione].tipo = Tipologia.azienda;
+                        }
+                    } else {
+                        System.out.println("Il contatto non esiste");
+                    }
+                }
+
+                case 6 -> {
                     System.out.println("Quale contatto vuoi elimiare?");
                     trovato=verificaPresenzaContatto(tastiera, gestore, contaContatti);
                     gestore = eliminaContatto(tastiera, gestore, contaContatti, trovato);
                     gestore[contaContatti - 1] = null;
                     contaContatti--;
                 }
-                case 6 -> fine = true; // Se l'utente sceglie 4, imposta fine a true per terminare il programma
+                case 7 -> fine = true; // Se l'utente sceglie 4, imposta fine a true per terminare il programma
             }
         } while (!fine); // Continua il ciclo finché l'utente non decide di terminare
         System.out.println("Fine programma"); // Stampa un messaggio per indicare la fine del programma
