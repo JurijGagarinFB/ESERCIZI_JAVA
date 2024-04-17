@@ -147,7 +147,19 @@ public class Main { // Definizione della classe Main
         return -1; // Contatto non presente
     }
     public static void eliminaContatto(Scanner tastiera, Persona[] gestore, int contaContatti, int trovato){
+        Persona[] gestore2 = gestore;
         if (trovato!=-1){
+            for (int i=0; i<(gestore.length-trovato); i++) {
+                gestore[trovato].nome = gestore[trovato + 1].nome;
+                gestore[trovato].cognome = gestore[trovato + 1].cognome;
+                gestore[trovato].numDiTelefono = gestore[trovato + 1].numDiTelefono;
+                gestore[trovato].tipo = gestore[trovato + 1].tipo;
+            }
+            for (int i=0; i<gestore.length; i++){
+                for (int j=0; j<gestore.length-1; i++){
+                    gestore[i] = gestore2[j];
+                }
+            }
 
         }else{
             System.out.println("Contatto non trovato!");
