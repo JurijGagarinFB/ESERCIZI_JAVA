@@ -100,7 +100,7 @@ public class Main { // Definizione della classe Main
                 case 6 -> {
                     System.out.println("Quale contatto vuoi elimiare?");
                     trovato=verificaPresenzaContatto(tastiera, gestore, contaContatti);
-                    gestore = eliminaContatto(tastiera, gestore, contaContatti, trovato);
+                    gestore = eliminaContatto(gestore, contaContatti, trovato);
                     gestore[contaContatti - 1] = null;
                     contaContatti--;
                 }
@@ -162,9 +162,9 @@ public class Main { // Definizione della classe Main
 
         return -1; // Contatto non presente
     }
-    public static Persona[] eliminaContatto(Scanner tastiera, Persona[] gestore, int contaContatti, int trovato){
+    public static Persona[] eliminaContatto(Persona[] gestore, int contaContatti, int trovato){
         if (trovato!=-1){
-            for (int i = trovato; i < gestore.length; i++) {
+            for (int i = trovato; i < contaContatti; i++) {
                 gestore[trovato] = gestore[trovato + 1];
             }
 
