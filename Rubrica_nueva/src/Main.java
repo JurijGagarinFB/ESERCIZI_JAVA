@@ -1,3 +1,26 @@
+/*
+Progettare un software che permetta ad un utente di poter gestire la propria rubrica telefonica, permettendo, tramite l’inserimento di un’apposita password, di visualizzare anche eventuali contatti nascosti.
+Un contatto nascosto può essere reso sempre visibile e viceversa.
+Gestire la lista delle ultime chiamate, in modo che possa essere coerente con quanto sopra richiesto
+*/
+
+/*
+* Rispetto a quanto scritto in verifica, ho cambiato l'ordine e il nome di alcune delle opzioni del menù,
+  raggruppando anche tutte le opzioni "amministratore" (cioè quelle che hanno a che fare con la password e la visibilità dei contatti)
+  in una singola opzione (la quale a sua volta stampa un menù contenente le varie opzioni amministratore), inoltre ho cambiato
+  il nome di qualche metodo (ad esempio ControllaContatto ora è verificaPresenzaContatto).
+* La parte più differente è la gestione della cronologia e della password.
+* In quanto a cronologia, in verifica avevo scritto che avrei messo i nuovi contatti chiamati in prima posizione nell'array della cronologia
+  e spostato gli altri precedentemente chiamati di un posto, mentre qui ho semplicemente messo le nuove chiamate all'ultimo posto
+  e nella stampa della cronologia stampo dall'ultimo posto (quindi il contatto chiamato più recentemente) al primo (quello meno recente).
+* In quanto a password, ho cambiato il rudimentale inserimento della password
+  in un login, logout e ho dato la possibilità di cambiare la password (password di default "admin").
+
+* Come richiesto, nella cronologia delle chiamate non vengono mostrate le chiamate effettuate a contatti nascosti.
+* */
+
+
+
 import java.util.Scanner; // Importa la classe Scanner per leggere input da tastiera
 import static Tools.Utility.*; // Importa staticamente il metodo menu() dalla classe Utility
 
@@ -6,7 +29,7 @@ public class Main { // Definizione della classe Main
         final int nContatti = 5; // Definisce il numero massimo di contatti
         Scanner tastiera = new Scanner(System.in); // Crea un oggetto Scanner per leggere l'input da tastiera
         Contatto[] gestore = new Contatto[nContatti]; // Crea un array di oggetti Contatto
-        String[] opzioni = {"Rubrica Telefonica", "1 - Inserimento", "2 - Visualizza", "3 - Verifica presenza contatto", "4 - Elimina Contato per nome e numero di telefono", "5 - Chiama Contatto", "6 - Cronologia Chiamate", "7 - Impostazioni Amministratore", "8 - Fine"}; // Array di stringhe contenente le opzioni del menu
+        String[] opzioni = {"Rubrica Telefonica", "1 - Inserimento", "2 - Visualizza", "3 - Verifica presenza contatto", "4 - Elimina Contatto", "5 - Chiama Contatto", "6 - Cronologia Chiamate", "7 - Impostazioni Amministratore", "8 - Fine"}; // Array di stringhe contenente le opzioni del menu
 
         boolean fine = false; // Variabile booleana per verificare se il programma deve terminare
         int trovato = 0;
