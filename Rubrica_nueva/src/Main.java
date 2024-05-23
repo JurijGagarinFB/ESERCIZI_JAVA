@@ -1,27 +1,27 @@
-/**/
-
 import java.util.Scanner; // Importa la classe Scanner per leggere input da tastiera
-
 import static Tools.Utility.*; // Importa staticamente il metodo menu() dalla classe Utility
 
 public class Main { // Definizione della classe Main
     public static void main(String[] args) { // Metodo principale main()
-        final int nContratti = 3; // Definisce il numero massimo di contratti
+        final int nContatti = 5; // Definisce il numero massimo di contatti
         Scanner tastiera = new Scanner(System.in); // Crea un oggetto Scanner per leggere l'input da tastiera
-        Contatto[] gestore = new Contatto[nContratti]; // Crea un array di oggetti Contatto
-        String[] opzioni = {"Rubrica Telefonica", "1 - Inserimento", "2 - Visualizza", "3 - Verifica presenza contatto", "4 - Ricerca numero telefono", "5 - Elimina Contato per nome e numero di telefono", "6 - Chiama Contatto", "6 - Fine"}; // Array di stringhe contenente le opzioni del menu
+        Contatto[] gestore = new Contatto[nContatti]; // Crea un array di oggetti Contatto
+        String[] opzioni = {"Rubrica Telefonica", "1 - Inserimento", "2 - Visualizza", "3 - Verifica presenza contatto", "4 - Elimina Contato per nome e numero di telefono", "5 - Chiama Contatto", "6 - Cronologia Chiamate", "7 - Impostazioni Amministratore", "8 - Fine"}; // Array di stringhe contenente le opzioni del menu
 
         boolean fine = false; // Variabile booleana per verificare se il programma deve terminare
-        int posizione=0;
-        int trovato=0;
+        int trovato = 0;
+        String password = "admin";
+        boolean utenteAmministratore = false, cambioNascosti = false;
 
-        String[] admin = {"Impostazioni Amministratore", "1 - Login Amministratore", "2 - Logout Amministratore", "3 - Cambia Password"};
+        String[] admin = {"Impostazioni Amministratore", "1 - Login Amministratore", "2 - Logout Amministratore", "3 - Cambia Password", "4 - Visualizza contatti nascosti", "5 - Cambia contatti nascosti", "6 - Esci dalle Impostazioni"}; // Array di stringhe contenente le opzioni del menu amministratore
         int contaContatti = 0; // Contatore per il numero di contatti presenti nell'array
+        Contatto[] cronologia = new Contatto[9999];
+        int numeroChiamateEffettuate = 0;
 
         do { // Ciclo do-while per continuare il menu finché l'utente non decide di terminare
             switch (menu(opzioni, tastiera)) { // Switch statement per gestire le varie opzioni del menu
-                case 1: { // Se l'utente sceglie 1
-                    if (nContratti > contaContatti) { // Verifica se ci sono ancora slot disponibili per i contratti
+                case 1 -> { // Se l'utente sceglie 1
+                    if (nContatti > contaContatti) { // Verifica se ci sono ancora slot disponibili per i contratti
                         boolean presente = false; // Variabile booleana per verificare se un contatto è già presente
                         Contatto dettagli = LeggiContatto(tastiera); // Legge i dettagli del contatto dall'input
                         for (int i = 0; i < contaContatti; i++) { // Scansione degli attuali contatti per verificare duplicati
@@ -31,26 +31,24 @@ public class Main { // Definizione della classe Main
                                 break; // Esci dal ciclo for
                             }
                         }
-                        if(!presente) { // Se il contatto non è presente, lo aggiunge all'array
+                        if (!presente) { // Se il contatto non è presente, lo aggiunge all'array
                             gestore[contaContatti] = dettagli; // Aggiunge il contatto all'array
                             contaContatti++; // Incrementa il numero di contatti
                         }
                     } else {
                         System.out.println("Finiti contratti"); // Stampa un messaggio se non ci sono più slot disponibili per i contratti
                     }
-                };
-                break;
-                case 2: { // Se l'utente sceglie 2
+                }
+                case 2 -> { // Se l'utente sceglie 2
                     if (contaContatti > 0) { // Verifica se ci sono contatti da visualizzare
-                        Visualizza(gestore, contaContatti, tastiera, posizione); // Chiama il metodo per visualizzare i contatti
+                        Visualizza(gestore, contaContatti); // Chiama il metodo per visualizzare i contatti
                     } else {
                         System.out.println("Non ci sono contatti da visualizzare"); // Stampa un messaggio se non ci sono contatti
                     }
-                };
-                break;
-                case 3: { // Se l'utente sceglie 3
+                }
+                case 3 -> { // Se l'utente sceglie 3
                     if (contaContatti > 0) { // Verifica se ci sono contatti
-                        if (verificaPresenzaContatto(tastiera, gestore, contaContatti)!=-1) { // Verifica la presenza di un contatto specifico
+                        if (verificaPresenzaContatto(tastiera, gestore, contaContatti, cambioNascosti) != -1) { // Verifica la presenza di un contatto specifico
                             System.out.println("Contatto presente"); // Stampa un messaggio se il contatto è presente
                         } else {
                             System.out.println("Contatto non presente"); // Stampa un messaggio se il contatto non è presente
@@ -59,46 +57,134 @@ public class Main { // Definizione della classe Main
                             contaContatti++; // Incrementa il numero di contatti
                             System.out.println("Contatto aggiunto con successo."); // Stampa un messaggio di conferma
                         }
-
                     } else {
                         System.out.println("Non ci sono contatti"); // Stampa un messaggio se non ci sono contatti
                     }
-                };
-                break;
-                case 4: { // Se l'utente sceglie 4
-                    if (contaContatti > 0) { // Verifica se ci sono contatti
-                        posizione = verificaPresenzaContatto(tastiera, gestore, contaContatti);
-                        if (posizione!=-1) { // Verifica la presenza di un contatto specifico
-                            System.out.println("Contatto presente"); // Stampa un messaggio se il contatto è presente
-                            Visualizza(gestore, contaContatti, tastiera, posizione);
-                        } else {
-                            System.out.println("Contatto non presente"); // Stampa un messaggio se il contatto non è presente
-                            System.out.println("Aggiunta del nuovo contatto..."); // Avviso di aggiunta di un nuovo contatto
-                            gestore[contaContatti] = LeggiContatto(tastiera); // Legge e aggiunge il nuovo contatto all'array
-                            contaContatti++; // Incrementa il numero di contatti
-                            System.out.println("Contatto aggiunto con successo."); // Stampa un messaggio di conferma
+                }
+                case 4 -> {
+                    System.out.println("Quale contatto vuoi eliminare?");
+                    trovato = verificaPresenzaContatto(tastiera, gestore, contaContatti, cambioNascosti);
+                    if (trovato != -1) { //se trova il contatto, chiama il metodo eliminaContatto
+                        gestore = eliminaContatto(gestore, contaContatti, trovato);
+                        contaContatti--;
+                    } else {
+                        System.out.println("Contatto non trovato!");
+                    }
+                }
+                case 5 -> {
+                    System.out.println("Quale contatto vuoi chiamare?"); //chiedo all'utente quale contatto chiamare e chiamo verificaPresenzaContatto
+                    trovato = verificaPresenzaContatto(tastiera, gestore, contaContatti, cambioNascosti);
+                    if (trovato != -1) { //se il contatto esiste, aggiungo 1 al suo numChiamate e aggiungo il contatto all'array della cronologia
+                        gestore[trovato].numChiamate++;
+                        System.out.println("Chiamata effettuata");
+                        cronologia[numeroChiamateEffettuate] = gestore[trovato];
+                        numeroChiamateEffettuate++;
+                    } else {
+                        System.out.println("Contatto non trovato");
+                    }
+                }
+                case 6 -> {
+                    System.out.println("Visualizzazione cronologia chiamate"); //siccome nell'aggiunta dei contatti alla cronologia venivano aggiunti alla fine dell'array, qui l'array viene stampato dall'ultimo al primo
+                    for (int i = numeroChiamateEffettuate - 1; i >= 0; i--) {
+                        if (cronologia[i] != null && !cronologia[i].nascosto) { //non stampo i contatti nascosti
+                            System.out.println(cronologia[i].anagrafica());
                         }
-
-                    } else {
-                        System.out.println("Non ci sono contatti"); // Stampa un messaggio se non ci sono contatti
                     }
-                };
-                break;
-                case 5: {
-                    System.out.println("Quale contatto vuoi elimiare?");
-                    trovato=verificaPresenzaContatto(tastiera, gestore, contaContatti);
-                    gestore = eliminaContatto(gestore, contaContatti, trovato);
-                    gestore[contaContatti - 1] = null;
-                    contaContatti--;
-                };
-                break;
-                case 6: fine = true; // Se l'utente sceglie 4, imposta fine a true per terminare il programma
-            };
-            break;
+                }
+                case 7 -> {
+                    boolean fineAmministratore = false, nuovaPasswordOk = false;
+                    String inserimentoPassword, controlloNuovaPassword;
+                    do {
+                        switch (menu(admin, tastiera)) {
+                            case 1 -> {
+                                System.out.println("Login Amministratore");
+                                if (!utenteAmministratore) { //se l'utente è già amministratore riferisco che il login è già avvenuto
+                                    System.out.println("Inserisci la password: "); //chiedo all'utente di inserire la password
+                                    inserimentoPassword = tastiera.nextLine();
+                                    if (inserimentoPassword.equals(password)) { //se ciò che viene inserito corrisponde con la password, aggiorno utenteAmministratore a true
+                                        System.out.println("Accesso Confermato");
+                                        utenteAmministratore = true;
+                                    } else {
+                                        System.out.println("Password Errata");
+                                    }
+                                } else {
+                                    System.out.println("Hai già fatto il login!");
+                                }
+                            }
+                            case 2 -> {
+                                System.out.println("Logout Amministratore");
+                                utenteAmministratore = false;
+                                System.out.println("Logout Effettuato");
+                            }
+                            case 3 -> {
+                                System.out.println("Cambio Password");
+                                System.out.println("Inserire la password corrente (default ''admin''): "); //chiedo all'utente di inserire la password corrente per sicurezza
+                                inserimentoPassword = tastiera.nextLine();
+                                if (inserimentoPassword.equals(password)) {
+                                    do {
+                                        nuovaPasswordOk = false;
+                                        System.out.println("Inserire la nuova password: "); //chiedo all'utente di inserire la nuova password
+                                        inserimentoPassword = tastiera.nextLine();
+                                        controlloNuovaPassword = inserimentoPassword;
+                                        System.out.println("Reinserire la nuova password: "); //chiedo all'utente di reinserire la nuova password per sicurezza
+                                        inserimentoPassword = tastiera.nextLine();
+                                        if (inserimentoPassword.equals(controlloNuovaPassword)) { //se la nuova password e il reinserimento combaciano, cambio la password
+                                            password = inserimentoPassword;
+                                            System.out.println("Password cambiata con successo!");
+                                            nuovaPasswordOk = true;
+                                        } else {
+                                            System.out.println("La password non corrisponde, riprovare!");
+                                        }
+                                    } while (!nuovaPasswordOk);
+                                } else {
+                                    System.out.println("La password non corrisponde");
+                                }
+                            }
+                            case 4 -> {
+                                System.out.println("Visualizzazione contatti nascosti");
+                                if (utenteAmministratore) { //se l'utente è amministratore, stampo tutti i contatti che hanno il flag nascosto a true
+                                    for (int i = 0; i < contaContatti; i++) {
+                                        if (gestore[i].nascosto) {
+                                            System.out.println(gestore[i].anagrafica());
+                                        }
+                                    }
+                                } else {
+                                    System.out.println("Non sei un amministratore!");
+                                }
+                            }
+                            case 5 -> {
+                                System.out.println("Cambio contatti nascosti");
+                                if (utenteAmministratore) { //se l'utente è amministratore, aggiorno il flag cambioNascosti a true (per permettere al metodo verificaPresenzaContatto di non saltare i contatti con il flag nascosto a true)
+                                    cambioNascosti = true;
+                                    trovato = verificaPresenzaContatto(tastiera, gestore, contaContatti, cambioNascosti);
+                                    if (trovato != -1) { //se viene trovato il contatto, controllo l'attuale stato del flag nascosto e ne inverto il valore
+                                        if (gestore[trovato].nascosto) {
+                                            gestore[trovato].nascosto = false;
+                                        } else {
+                                            gestore[trovato].nascosto = true;
+                                        }
+                                        System.out.println("Aggiornato status visibilità");
+                                    } else {
+                                        System.out.println("Contatto non trovato");
+                                    }
+                                } else {
+                                    System.out.println("Non sei un amministratore!");
+                                }
+                            }
+                            case 6 -> {
+                                System.out.println("Uscita impostazioni");
+                                fineAmministratore = true;
+                            }
+                        }
+                    } while (!fineAmministratore);
+                }
+                case 8 -> {
+                    fine = true; // Se l'utente sceglie 8, imposta fine a true per terminare il programma
+                }
+            }
         } while (!fine); // Continua il ciclo finché l'utente non decide di terminare
         System.out.println("Fine programma"); // Stampa un messaggio per indicare la fine del programma
     }
-
 
     // Metodo per leggere i dettagli di un contatto
     public static Contatto LeggiContatto(Scanner tastiera) {
@@ -113,7 +199,7 @@ public class Main { // Definizione della classe Main
     }
 
     // Metodo per visualizzare i contatti presenti
-    public static void Visualizza(Contatto[] gestore, int contaContatti, Scanner tastiera, int posizione) {
+    public static void Visualizza(Contatto[] gestore, int contaContatti) {
         for (int i = 0; i < contaContatti; i++) {
             if (!gestore[i].nascosto) {
                 System.out.println(gestore[i].anagrafica()); // Stampa i dettagli di ogni contatto presente
@@ -122,26 +208,34 @@ public class Main { // Definizione della classe Main
     }
 
     // Metodo per verificare la presenza di un contatto
-    public static int verificaPresenzaContatto(Scanner tastiera, Contatto[] gestore, int contaContatti) {
+    public static int verificaPresenzaContatto(Scanner tastiera, Contatto[] gestore, int contaContatti, boolean cambioNascosti) {
         System.out.println("Inserisci il nome");
         String nome = tastiera.nextLine();
         System.out.println("Inserisci il numero di telefono");
         String numTelefono = tastiera.nextLine();
 
         for (int i = 0; i < contaContatti; i++) {
-            if (gestore[i].nome.equals(nome) && gestore[i].numTelefono.equals(numTelefono) && !gestore[i].nascosto) {
-                return i; // Contatto presente
+            if (!cambioNascosti) { //caso usato normalmente, stampa tutti i contatti tranne quelli con il flag nascosto a true
+                if (gestore[i].nome.equals(nome) && gestore[i].numTelefono.equals(numTelefono) && !gestore[i].nascosto) {
+                    return i; // Contatto presente
+                }
+            } else { //caso usato quando cambioNascosti è a true, quindi quando è necessario che il codice consideri anche i contatti con il flag nascosto a true
+                if (gestore[i].nome.equals(nome) && gestore[i].numTelefono.equals(numTelefono)) {
+                    return i; // Contatto presente
+                }
             }
         }
         return -1; // Contatto non presente
     }
-    public static Contatto[] eliminaContatto(Contatto[] gestore, int contaContatti, int trovato){
-        if (trovato!=-1){
-            for (int i = trovato; i < contaContatti; i++) {
-                gestore[trovato] = gestore[trovato + 1];
-            }
 
-        }else{
+    // Metodo corretto per eliminare un contatto
+    public static Contatto[] eliminaContatto(Contatto[] gestore, int contaContatti, int trovato) {
+        if (trovato != -1) {
+            for (int i = trovato; i < contaContatti - 1; i++) {
+                gestore[i] = gestore[i + 1];
+            }
+            gestore[contaContatti - 1] = null; // Elimina l'ultimo contatto
+        } else {
             System.out.println("Contatto non trovato!");
         }
         return gestore;
