@@ -21,6 +21,9 @@ Gestire la lista delle ultime chiamate, in modo che possa essere coerente con qu
 
 
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner; // Importa la classe Scanner per leggere input da tastiera
 import static Tools.Utility.*; // Importa staticamente il metodo menu() dalla classe Utility
 
@@ -29,7 +32,7 @@ public class Main { // Definizione della classe Main
         final int nContatti = 5; // Definisce il numero massimo di contatti
         Scanner tastiera = new Scanner(System.in); // Crea un oggetto Scanner per leggere l'input da tastiera
         Contatto[] gestore = new Contatto[nContatti]; // Crea un array di oggetti Contatto
-        String[] opzioni = {"Rubrica Telefonica", "1 - Inserimento", "2 - Visualizza", "3 - Verifica presenza contatto", "4 - Elimina Contatto", "5 - Chiama Contatto", "6 - Cronologia Chiamate", "7 - Impostazioni Amministratore", "8 - Fine"}; // Array di stringhe contenente le opzioni del menu
+        String[] opzioni = {"Rubrica Telefonica", "1 - Inserimento", "2 - Visualizza", "3 - Verifica presenza contatto", "4 - Elimina Contatto", "5 - Chiama Contatto", "6 - Cronologia Chiamate", "7 - Impostazioni Amministratore", "8 - Salva su file", "9 - Carica da file", "10 - Fine"}; // Array di stringhe contenente le opzioni del menu
 
         boolean fine = false; // Variabile booleana per verificare se il programma deve terminare
         int trovato = 0;
@@ -202,6 +205,22 @@ public class Main { // Definizione della classe Main
                     } while (!fineAmministratore);
                 }
                 case 8 -> {
+                    try {
+                        scriviFile("Archivio.csv", gestore, contaContatti);
+                    }catch (IOException x){
+                        System.out.println("Errore: " + x.toString());
+                    }
+                    System.out.println("Scrittura fatta");
+                }
+                case 9 -> {
+                    try {
+                        contaContatti = leggiFile("Archivio.csv", gestore, contaContatti);
+                    }catch (IOException x){
+                        System.out.println("Errore: " + x.toString());
+                    }
+                    System.out.println("Lettura fatta");
+                }
+                case 10 -> {
                     fine = true; // Se l'utente sceglie 8, imposta fine a true per terminare il programma
                 }
             }
@@ -263,4 +282,39 @@ public class Main { // Definizione della classe Main
         }
         return gestore;
     }
+
+    public static void scriviFile(String nomeFile, Contatto[] persone, int nContatti) throws IOException {
+        FileWriter scrittore = new FileWriter(nomeFile);
+        for (int i = 0; i< nContatti; i++){
+            scrittore.write(persone[i].toString() + "\r\n");
+        }
+        scrittore.flush();
+        scrittore.close();
+    }
+
+    public static int leggiFile(String nomeFile, Contatto[] persone, int nContatti) throws IOException {
+        FileReader lettore = new FileReader(nomeFile);
+        Scanner tastiera = new Scanner(lettore);
+        String[] dati = null;
+        String riga;
+        int contaLinee = 0;
+        while (tastiera.hasNextLine() && contaLinee < persone.length){
+            dati = tastiera.nextLine().split(",");
+            Contatto p = new Contatto();
+            p.nome = dati[0];
+            p.numTelefono = dati[1];
+            switch(dati[3]){
+                case "false":
+                    p.nascosto = false;
+                    break;
+                case "true":
+                    p.nascosto = true;
+                    break;
+            }
+            persone[contaLinee] = p;
+            contaLinee++;
+        }
+        return contaLinee;
+    }
+
 }
