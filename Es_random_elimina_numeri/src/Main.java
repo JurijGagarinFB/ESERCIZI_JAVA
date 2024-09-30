@@ -9,15 +9,7 @@ public class Main {
         Scanner tastiera = new Scanner(System.in);
 
         // Array di stringhe per le opzioni del menu
-        String[] opzioni = {
-                "Menu",
-                "1 Genera Random",
-                "2 Visualizzazione",
-                "3 Ricerca",
-                "4 Cancella numero con decremento",
-                "5 Cancella numero e ritorna nuovo vettore",
-                "6 Fine"
-        };
+        String[] opzioni = {"Menu", "1 Genera Random", "2 Visualizzazione", "3 Ricerca", "4 Cancella numero con decremento", "5 Cancella numero e ritorna nuovo vettore", "6 Fine"};
 
         // Variabile di controllo per uscire dal ciclo
         boolean esci = false; // Inizializzato a false, continua il ciclo finché non viene settato a true
@@ -128,39 +120,37 @@ public class Main {
     }
 
     // Metodo per cancellare un numero e decrementare la lunghezza del vettore
-public static int[] cancellaNumeroConDecremento(int[] nEstratti, int numero) {
-    // Controllo per numero fuori dal range
-    if (numero < 1 || numero > 100) {
-        System.out.println("Valore out of range: il numero deve essere compreso tra 1 e 100.");
-        return nEstratti; // Restituisce l'array originale se il numero non è valido
-    }
-
-    if (nEstratti == null) { // Controlla se non ci sono numeri generati
-        System.out.println("Nessun numero generato.");
-        return null; // Restituisce null se non ci sono numeri
-    }
-
-    // Usa il metodo trovaNumeri per ottenere la posizione del numero
-    int posizione = trovaNumeri(nEstratti, numero);
-    if (posizione == -1) {
-        return nEstratti; // Se il numero non è trovato, restituisce l'array originale
-    }
-
-    // Crea un nuovo array con una dimensione ridotta
-    int[] nuovoVettore = new int[nEstratti.length - 1];
-
-    // Copia manualmente i valori nel nuovo array, saltando il numero da cancellare
-    for (int i = 0, j = 0; i < nEstratti.length; i++) {
-        if (i != posizione) { // Salta la posizione del numero da rimuovere
-            nuovoVettore[j] = nEstratti[i]; // Copia il valore nell'array ridotto
-            j++; // Incrementa l'indice per il nuovo array
+    public static int[] cancellaNumeroConDecremento(int[] nEstratti, int numero) {
+        // Controllo per numero fuori dal range
+        if (numero < 1 || numero > 100) {
+            System.out.println("Valore out of range: il numero deve essere compreso tra 1 e 100.");
+            return nEstratti; // Restituisce l'array originale se il numero non è valido
         }
-    }
 
-    System.out.println("Numero " + numero + " cancellato e vettore ricompattato.");
-    return nuovoVettore; // Restituisce il nuovo array ridotto
-}
+        if (nEstratti == null) { // Controlla se non ci sono numeri generati
+            System.out.println("Nessun numero generato.");
+            return null; // Restituisce null se non ci sono numeri
+        }
 
+        // Usa il metodo trovaNumeri per ottenere la posizione del numero
+        int posizione = trovaNumeri(nEstratti, numero);
+        if (posizione == -1) {
+            return nEstratti; // Se il numero non è trovato, restituisce l'array originale
+        }
+
+        // Crea un nuovo array con una dimensione ridotta
+        int[] nuovoVettore = new int[nEstratti.length - 1];
+
+        // Copia manualmente i valori nel nuovo array, saltando il numero da cancellare
+        for (int i = 0, j = 0; i < nEstratti.length; i++) {
+            if (i != posizione) { // Salta la posizione del numero da rimuovere
+                nuovoVettore[j] = nEstratti[i]; // Copia il valore nell'array ridotto
+                j++; // Incrementa l'indice per il nuovo array
+            }
+        }
+
+        System.out.println("Numero " + numero + " cancellato e vettore ricompattato.");
+        return nuovoVettore; // Restituisce il nuovo array ridotto
     }
 
     // Metodo per cancellare un numero e creare un nuovo array di dimensione 20
