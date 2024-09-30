@@ -142,10 +142,12 @@ public class Main {
         int[] nuovoVettore = new int[nEstratti.length - 1];
 
         // Copia manualmente i valori nel nuovo array, saltando il numero da cancellare
-        for (int i = 0, j = 0; i < nEstratti.length; i++) {
-            if (i != posizione) { // Salta la posizione del numero da rimuovere
-                nuovoVettore[j] = nEstratti[i]; // Copia il valore nell'array ridotto
-                j++; // Incrementa l'indice per il nuovo array
+        for (int i = 0; i < nEstratti.length; i++) {
+            for (int j = 0; i < nEstratti.length; i++) {
+                if (i != posizione) { // Salta la posizione del numero da rimuovere
+                    nuovoVettore[j] = nEstratti[i]; // Copia il valore nell'array ridotto
+                    j++; // Incrementa l'indice per il nuovo array
+                }
             }
         }
 
