@@ -128,34 +128,39 @@ public class Main {
     }
 
     // Metodo per cancellare un numero e decrementare la lunghezza del vettore
-    public static int[] cancellaNumeroConDecremento(int[] nEstratti, int numero) {
-        // Controllo per numero fuori dal range
-        if (numero < 1 || numero > 100) {
-            System.out.println("Valore out of range: il numero deve essere compreso tra 1 e 100.");
-            return nEstratti; // Restituisce l'array originale se il numero non è valido
-        }
+public static int[] cancellaNumeroConDecremento(int[] nEstratti, int numero) {
+    // Controllo per numero fuori dal range
+    if (numero < 1 || numero > 100) {
+        System.out.println("Valore out of range: il numero deve essere compreso tra 1 e 100.");
+        return nEstratti; // Restituisce l'array originale se il numero non è valido
+    }
 
-        if (nEstratti == null) { // Controlla se non ci sono numeri generati
-            System.out.println("Nessun numero generato.");
-            return null; // Restituisce null se non ci sono numeri
-        }
+    if (nEstratti == null) { // Controlla se non ci sono numeri generati
+        System.out.println("Nessun numero generato.");
+        return null; // Restituisce null se non ci sono numeri
+    }
 
-        // Usa il metodo trovaNumeri per ottenere la posizione del numero
-        int posizione = trovaNumeri(nEstratti, numero);
-        if (posizione == -1) {
-            return nEstratti; // Se il numero non è trovato, restituisce l'array originale
-        }
+    // Usa il metodo trovaNumeri per ottenere la posizione del numero
+    int posizione = trovaNumeri(nEstratti, numero);
+    if (posizione == -1) {
+        return nEstratti; // Se il numero non è trovato, restituisce l'array originale
+    }
 
-        // Sposta gli elementi successivi indietro di una posizione per ricompattare l'array
-        for (int i = posizione; i < nEstratti.length - 1; i++) {
-            nEstratti[i] = nEstratti[i + 1]; // Ricompattamento del vettore
-        }
+    // Crea un nuovo array con una dimensione ridotta
+    int[] nuovoVettore = new int[nEstratti.length - 1];
 
-        // Crea un nuovo array con una dimensione ridotta
-        int[] nuovoVettore = new int[nEstratti.length - 1];
-        System.arraycopy(nEstratti, 0, nuovoVettore, 0, nuovoVettore.length); // Copia il contenuto nel nuovo array
-        System.out.println("Numero " + numero + " cancellato e vettore ricompattato.");
-        return nuovoVettore; // Restituisce il nuovo array ridotto
+    // Copia manualmente i valori nel nuovo array, saltando il numero da cancellare
+    for (int i = 0, j = 0; i < nEstratti.length; i++) {
+        if (i != posizione) { // Salta la posizione del numero da rimuovere
+            nuovoVettore[j] = nEstratti[i]; // Copia il valore nell'array ridotto
+            j++; // Incrementa l'indice per il nuovo array
+        }
+    }
+
+    System.out.println("Numero " + numero + " cancellato e vettore ricompattato.");
+    return nuovoVettore; // Restituisce il nuovo array ridotto
+}
+
     }
 
     // Metodo per cancellare un numero e creare un nuovo array di dimensione 20
