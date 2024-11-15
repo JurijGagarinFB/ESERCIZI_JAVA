@@ -77,6 +77,7 @@ public class Main {
                         Pilota pilota = aggiuntaPilota(nomePilota, cognomePilota, nazionalitaPilota, etaPilota);
                         if (cercaPilota(Gara, pilota) != -1) {
                             Gara.remove(cercaPilota(Gara, pilota));
+                            nAuto--;
                         } else {
                             System.out.println("Pilota e corrispondente auto da rimuovere non trovati");
                         }
