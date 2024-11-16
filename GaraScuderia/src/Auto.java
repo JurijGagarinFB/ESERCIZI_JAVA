@@ -1,5 +1,3 @@
-
-
 public class Auto {
     private Scuderie scuderia;
     private Pilota pilota;

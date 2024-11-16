@@ -2,10 +2,27 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Gara {
+    private String nomeGara;
     private ArrayList<Auto> auto;
+    private Pilota risultato;
 
-    public Gara(ArrayList<Auto> auto) {
+    public Gara(String nomeGara, ArrayList<Auto> auto) {
+        setNomeGara(nomeGara);
         setAuto(auto);
+        setRisultato(corriGara());
+    }
+
+    public Pilota corriGara() {
+        Random random = new Random();
+        return risultato = auto.get(random.nextInt(0, auto.size())).getPilota();
+    }
+
+    public void setNomeGara(String nomeGara) {
+        this.nomeGara = nomeGara;
+    }
+
+    public String getNomeGara() {
+        return nomeGara;
     }
 
     public void setAuto(ArrayList<Auto> auto) {
@@ -15,6 +32,16 @@ public class Gara {
     public ArrayList<Auto> getAuto() {
         return auto;
     }
+
+    public void setRisultato(Pilota risultato) {
+        this.risultato = risultato;
+    }
+
+    public Pilota getRisultato() {
+        return risultato;
+    }
+
+    /* test randomizzazione auto nell'arraylist di auto per fare una "classifica" da stampare attraverso il metodo di visualizzazione (randomizzo le posizioni delle auto nell'arraylist e stampo l'arraylist per ottenere la classifica)
 
     public ArrayList<Auto> randomizeAuto() {
         Random random = new Random();
@@ -37,4 +64,5 @@ public class Gara {
         copiaAuto.add(indice, auto.get(finale)); // Aggiunge il nuovo numero
         return copiaAuto;
     }
+    */
 }
