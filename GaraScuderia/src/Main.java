@@ -18,7 +18,7 @@ public class Main {
         String[] opzioni = {"GARA", "1-Inserisci Auto", "2-Visualizza Auto", "3-Rimuovi Auto", "4-Esci"};
         boolean fine = false;
 
-        ArrayList<Auto> Gara = new ArrayList<>();
+        ArrayList<Auto> corsa = new ArrayList<>();
         final int MAXAUTO = 10;
         int nAuto = 0;
         do {
@@ -36,17 +36,17 @@ public class Main {
                             System.out.println("Inserisci età pilota: ");
                             int etaPilota = Integer.parseInt(tastiera.nextLine());
                             Pilota pilota = aggiuntaPilota(nomePilota, cognomePilota, nazionalitaPilota, etaPilota);
-                            if (cercaPilota(Gara, pilota) != -1) {
+                            if (cercaPilota(corsa, pilota) != -1) {
                                 System.out.println("Questo pilota è già in gara!");
                             } else {
                                 System.out.println("Inserisci scuderia (redbull,mercedes,ferrari): ");
                                 Scuderie scuderia = Scuderie.valueOf(tastiera.nextLine().toUpperCase());
                                 System.out.println("Inserisci cilindrata: ");
                                 int cilindrata = Integer.parseInt(tastiera.nextLine());
-                                Gara.add(new Auto(scuderia, pilota, cilindrata));
+                                corsa.add(new Auto(scuderia, pilota, cilindrata));
                                 nAuto++;
                                 System.out.println("Hai inserito la seguente auto: ");
-                                System.out.println(Gara.getLast().toString());
+                                System.out.println(corsa.getLast().toString());
                             }
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
@@ -58,8 +58,8 @@ public class Main {
 
                 case 2 -> {
                     System.out.println("Visualizzazione Auto");
-                    for (int i = 0; i < Gara.size(); i++) {
-                        System.out.println(Gara.get(i).toString());
+                    for (int i = 0; i < corsa.size(); i++) {
+                        System.out.println(corsa.get(i).toString());
                     }
                 }
 
@@ -75,8 +75,8 @@ public class Main {
                         System.out.println("Inserisci età pilota: ");
                         int etaPilota = Integer.parseInt(tastiera.nextLine());
                         Pilota pilota = aggiuntaPilota(nomePilota, cognomePilota, nazionalitaPilota, etaPilota);
-                        if (cercaPilota(Gara, pilota) != -1) {
-                            Gara.remove(cercaPilota(Gara, pilota));
+                        if (cercaPilota(corsa, pilota) != -1) {
+                            corsa.remove(cercaPilota(corsa, pilota));
                             nAuto--;
                         } else {
                             System.out.println("Pilota e corrispondente auto da rimuovere non trovati");
@@ -94,9 +94,9 @@ public class Main {
         } while (!fine);
     }
 
-    public static int cercaPilota(ArrayList<Auto> Gara, Pilota pilota) {
-        for (int i = 0; i < Gara.size(); i++) {
-            if (pilota.getNome().equals(Gara.get(i).getPilota().getNome()) && pilota.getCognome().equals(Gara.get(i).getPilota().getCognome()) && pilota.getEta() == Gara.get(i).getPilota().getEta()) {
+    public static int cercaPilota(ArrayList<Auto> corsa, Pilota pilota) {
+        for (int i = 0; i < corsa.size(); i++) {
+            if (pilota.getNome().equals(corsa.get(i).getPilota().getNome()) && pilota.getCognome().equals(corsa.get(i).getPilota().getCognome()) && pilota.getEta() == corsa.get(i).getPilota().getEta()) {
                 return i;
             }
         }
