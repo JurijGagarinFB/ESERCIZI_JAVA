@@ -9,7 +9,7 @@ Verificare la funzionalità delle classi considerando che non possono esistere d
 import java.util.Scanner;
 import java.util.ArrayList;
 
-import static Tools.Utility.*;
+import static Scuderia.src.Tools.Utility.*;
 
 public class Main {
     public static void main(String[] args) {

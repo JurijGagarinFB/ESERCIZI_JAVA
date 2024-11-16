@@ -1,3 +1,5 @@
+package Scuderia.src;
+
 public class Pilota {
     private String nome;
     private String cognome;
