@@ -85,7 +85,7 @@ public class Main {
                             }
 
                             case 2 -> {
-                                if (posPartenza == cont) {
+                                if (posPartenza < cont) {
                                     posPartenza += 1;
                                     System.out.println(mensola.get(posPartenza - 1).FormattaDati());
                                 } else {
