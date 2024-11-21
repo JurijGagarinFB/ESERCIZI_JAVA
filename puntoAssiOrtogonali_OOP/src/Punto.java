@@ -44,6 +44,6 @@ public class Punto {
 
     @Override
     public String toString() {
-        return "X=" + getX() + " - Y=" + getY();
+        return "X=" + getX() + ", Y=" + getY();
     }
 }

@@ -1,42 +1,58 @@
+/*
+Francesco Bazaj    4F
+Primo programma dove testare le funzionalità dell'OOP
+
+21/11/2024
+Completato Rettangolo.java (Presente in commento anche sistema di visualizzazione grafica del rettangolo),
+aggiornati Main.java (input e output, try-catch),
+Punto.java (Aggiornato metodo toString),
+Segmento.java (aggiunti parametri punti, rispettivi getters e setters, spostato calcolo lunghezza in metodo fuori dal costruttore, aggiornato toString)
+ */
+
+
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner tastiera = new Scanner(System.in);
 
-        // Creazione dei due punti per il test delle classi Punto e Segmento
-        System.out.println("Inserisci coordinata X del primo punto:");
-        double coordinataXprimo = tastiera.nextDouble();
-        System.out.println("Inserisci coordinata Y del primo punto:");
-        double coordinataYprimo = tastiera.nextDouble();
-        System.out.println("Inserisci coordinata X del secondo punto:");
-        double coordinataXsecondo = tastiera.nextDouble();
-        System.out.println("Inserisci coordinata Y del secondo punto:");
-        double coordinataYsecondo = tastiera.nextDouble();
+        try {
+            // Input per il punto in alto a sinistra
+            System.out.println("Inserisci la coordinata X del punto in alto a sinistra del rettangolo:");
+            double xAltoSinistra = tastiera.nextDouble();
+            System.out.println("Inserisci la coordinata Y del punto in alto a sinistra del rettangolo:");
+            double yAltoSinistra = tastiera.nextDouble();
 
-        Punto primo = new Punto(coordinataXprimo, coordinataYprimo);
-        Punto secondo = new Punto(coordinataXsecondo, coordinataYsecondo);
+            // Creazione del punto
+            Punto puntoAltoSinistra = new Punto(xAltoSinistra, yAltoSinistra);
 
-        // Test della classe Segmento
-        Segmento lunghezza = new Segmento(primo, secondo);
-        System.out.println("Lunghezza del segmento: " + lunghezza.toString());
+            // Input per base e altezza
+            System.out.println("Inserisci la base del rettangolo:");
+            double base = tastiera.nextDouble();
+            System.out.println("Inserisci l'altezza del rettangolo:");
+            double altezza = tastiera.nextDouble();
 
-        // Test della classe Rettangolo
-        System.out.println("Inserisci la base del rettangolo:");
-        double base = tastiera.nextDouble();
-        System.out.println("Inserisci l'altezza del rettangolo:");
-        double altezza = tastiera.nextDouble();
+            // Creazione del rettangolo
+            Rettangolo rettangolo = new Rettangolo(base, altezza, puntoAltoSinistra);
 
-        // Creazione di un punto di origine per il rettangolo
-        System.out.println("Inserisci la coordinata X del punto di origine del rettangolo:");
-        double xOrigine = tastiera.nextDouble();
-        System.out.println("Inserisci la coordinata Y del punto di origine del rettangolo:");
-        double yOrigine = tastiera.nextDouble();
-        Punto puntoOrigine = new Punto(xOrigine, yOrigine);
+            // Stampa delle informazioni sul rettangolo
+            System.out.println(rettangolo.toString());
+            System.out.println("Segmenti del rettangolo:");
+            for (Segmento segmento : rettangolo.getSegmenti()) {
+                if (rettangolo.getSegmenti().indexOf(segmento) == 0) {
+                    System.out.println("AB: " + segmento.toString());
+                } else if (rettangolo.getSegmenti().indexOf(segmento) == 1) {
+                    System.out.println("BC: " + segmento.toString());
+                } else if (rettangolo.getSegmenti().indexOf(segmento) == 2) {
+                    System.out.println("CD: " + segmento.toString());
+                } else if (rettangolo.getSegmenti().indexOf(segmento) == 3) {
+                    System.out.println("DA: " + segmento.toString());
+                }
+            }
 
-        // Creazione e stampa del rettangolo
-        Rettangolo rettangolo = new Rettangolo(base, altezza, puntoOrigine);
-        System.out.println(rettangolo.toString());
-
+            //rettangolo.visualizzaPianoCartesiano(); chiamata al metodo di test visualizzazione grafica
+        } catch (Exception e) {
+            System.out.println("Errore: " + e.getMessage());
+        }
     }
 }
