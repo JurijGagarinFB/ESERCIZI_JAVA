@@ -90,7 +90,7 @@ public class Rettangolo {
                     System.out.print("|"); // Asse Y
                 } else if (y == 0) {
                     System.out.print("-"); // Asse X
-                } else if (isInsideRettangolo(x, y, baseInt, altezzaInt)) {
+                } else if (appartenenzaRettangolo(x, y, baseInt, altezzaInt)) {
                     System.out.print("*"); // Parte del rettangolo
                 } else {
                     System.out.print(" "); // Vuoto
