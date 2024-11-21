@@ -38,7 +38,5 @@ public class Main {
         Rettangolo rettangolo = new Rettangolo(base, altezza, puntoOrigine);
         System.out.println(rettangolo.toString());
 
-        // Chiudere lo scanner
-        tastiera.close();
     }
 }

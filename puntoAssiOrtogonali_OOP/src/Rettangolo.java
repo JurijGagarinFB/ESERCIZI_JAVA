@@ -6,7 +6,6 @@ public class Rettangolo {
     private Punto punto; // Punto di origine (in basso a sinistra) del rettangolo
     public ArrayList<Punto> lati;
 
-    // Costruttore della classe Rettangolo
     public Rettangolo(double base, double altezza, Punto punto) {
         this.base = base;
         this.altezza = altezza;
@@ -43,7 +42,6 @@ public class Rettangolo {
         return 2 * (base + altezza);
     }
 
-    // Getters e Setters
     public double getBase() {
         return base;
     }
@@ -71,7 +69,6 @@ public class Rettangolo {
         this.lati = calcolaVertici(); // Aggiorna i vertici
     }
 
-    // Metodo toString per rappresentare il rettangolo
     @Override
     public String toString() {
         return "Rettangolo [base=" + base + ", altezza=" + altezza + ", punto di origine=" + punto +
