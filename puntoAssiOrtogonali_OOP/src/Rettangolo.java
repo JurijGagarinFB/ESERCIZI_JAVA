@@ -71,25 +71,29 @@ public class Rettangolo {
         return "Rettangolo: Base=" + base + " , Altezza=" + altezza + " - Punto in alto a sinistra: " + punto + " - Area=" + calcolaArea() + " - Perimetro=" + calcolaPerimetro();
     }
 
-    /* TEST METODI PER RAPPRESENTARE GRAFICAMENTE RETTANGOLO. NON APPLICATI CAUSA INCERTEZZA FUNZIONAMENTO CORRETTO
     // Metodo per visualizzare il rettangolo e il piano cartesiano in ASCII
     public void visualizzaPianoCartesiano() {
-        int larghezza = (int) Math.ceil(punto.getX()); // Estensione sull'asse X
+        int baseInt = (int) Math.ceil(base)-1;
+        int altezzaInt = (int) Math.ceil(altezza)-1;
+        int larghezza = (int) Math.ceil(punto.getX())+baseInt; // Estensione sull'asse X
         int altezzaMassima = (int) Math.ceil(punto.getY()); // Estensione sull'asse Y
-        int baseInt = (int) Math.ceil(base);
-        int altezzaInt = (int) Math.ceil(altezza);
-
+        int contaAscissa = 0;
+        System.out.println("^y");
         // Disegno del piano cartesiano
         for (int y = altezzaMassima + 1; y >= 0; y--) { // Scorriamo le righe dall'alto verso il basso
             for (int x = 0; x <= larghezza + 1; x++) { // Scorriamo le colonne da sinistra a destra
 
                 // Disegna gli assi
                 if (x == 0 && y == 0) {
-                    System.out.print("+"); // Origine
+                    System.out.print('\u2514'); // Origine
                 } else if (x == 0) {
                     System.out.print("|"); // Asse Y
                 } else if (y == 0) {
                     System.out.print("-"); // Asse X
+                    contaAscissa++;
+                    if(contaAscissa > larghezza){
+                        System.out.print(">x");
+                    }
                 } else if (appartenenzaRettangolo(x, y, baseInt, altezzaInt)) {
                     System.out.print("*"); // Parte del rettangolo
                 } else {
@@ -102,12 +106,12 @@ public class Rettangolo {
 
     // Metodo per verificare se un punto è all'interno del rettangolo
     private boolean appartenenzaRettangolo(int x, int y, int baseInt, int altezzaInt) {
-        int xInizio = (int) Math.ceil(punto.getX()) - baseInt;
-        int xFine = (int) Math.ceil(punto.getX());
+        int xInizio = (int) Math.ceil(punto.getX());
+        int xFine = (int) Math.ceil(punto.getX()) + baseInt;
         int yInizio = (int) Math.ceil(punto.getY()) - altezzaInt;
         int yFine = (int) Math.ceil(punto.getY());
 
         return x >= xInizio && x <= xFine && y >= yInizio && y <= yFine;
     }
-     */
+
 }

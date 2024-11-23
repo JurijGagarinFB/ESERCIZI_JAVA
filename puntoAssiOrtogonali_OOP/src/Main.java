@@ -50,7 +50,7 @@ public class Main {
                 }
             }
 
-            //rettangolo.visualizzaPianoCartesiano(); chiamata al metodo di test visualizzazione grafica
+            rettangolo.visualizzaPianoCartesiano();
         } catch (Exception e) {
             System.out.println("Errore: " + e.getMessage());
         }
