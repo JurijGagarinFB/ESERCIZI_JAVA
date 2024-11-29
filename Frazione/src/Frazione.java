@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Frazione {
     private int numeratore, denominatore;
-    private double risultato;
 
     public int getNumeratore() {
         return numeratore;
@@ -12,31 +11,29 @@ public class Frazione {
         return denominatore;
     }
 
-    public double getRisultato() {
-        return risultato;
-    }
-
     public Frazione(int numeratore, int denominatore) throws Exception {
         if (denominatore == 0) {
             throw new Exception("Il denominatore non può essere nullo");
         }
         this.numeratore = numeratore;
         this.denominatore = denominatore;
-        this.risultato = (double) numeratore / denominatore;
     }
 
     public Frazione(String frazione) throws Exception {
         ArrayList<Integer> componentiNum = new ArrayList<>();
         ArrayList<Integer> componentiDen = new ArrayList<>();
         boolean trovato = false;
-        for (int i = frazione.length() - 1; i > 0; i--) {
-            if (frazione.charAt(i) == '/') {
+
+        for (int i = frazione.length() - 1; i >= 0; i--) {
+            char carattere = frazione.charAt(i);
+            if (carattere == '/') {
                 trovato = true;
+                continue;
             }
             if (!trovato) {
-                componentiDen.add((int) frazione.charAt(i));
+                componentiDen.add(carattere - '0'); //uso -'0' perché in questo caso sto usando gli ascii. codice ascii dello 0 è 48. se ad esempio il numero è 1, 49-48 = 1.
             } else {
-                componentiNum.add((int) frazione.charAt(i - 1));
+                componentiNum.add(carattere - '0');
             }
         }
 
@@ -48,6 +45,8 @@ public class Frazione {
             numeratore += componentiNum.get(i) * moltiplicatore;
             moltiplicatore *= 10;
         }
+
+        moltiplicatore = 1;
         for (int i = 0; i < componentiDen.size(); i++) {
             denominatore += componentiDen.get(i) * moltiplicatore;
             moltiplicatore *= 10;
@@ -56,49 +55,76 @@ public class Frazione {
         if (denominatore == 0) {
             throw new Exception("Il denominatore non può essere nullo");
         }
+
         this.numeratore = numeratore;
         this.denominatore = denominatore;
-        this.risultato = (double) numeratore / denominatore;
     }
 
-    public String sommaFrazione(Frazione frazione1, Frazione frazione2) {
-        if (frazione1.getDenominatore() == frazione2.getDenominatore()) {
-            return frazione1.getNumeratore() + frazione2.getNumeratore() + "/" + frazione1.getDenominatore();
+
+    private String sommaFrazioneRitornaStringa(Frazione frazione2) {
+        if (this.denominatore == frazione2.getDenominatore()) {
+            return (this.numeratore + frazione2.getNumeratore()) + "/" + this.denominatore;
         }
+
         int denominatore = 0;
         int i = 1;
         do {
-            if (i % frazione1.getDenominatore() == 0 && i % frazione2.getDenominatore() == 0) {
+            if (i % this.denominatore == 0 && i % frazione2.getDenominatore() == 0) {
                 denominatore = i;
             }
             i++;
         } while (denominatore == 0);
-        double primoAddendo = ((double) denominatore / frazione1.getDenominatore()) * frazione1.getNumeratore();
+
+        double primoAddendo = ((double) denominatore / this.denominatore) * this.numeratore;
         double secondoAddendo = ((double) denominatore / frazione2.getDenominatore()) * frazione2.getNumeratore();
         double numeratore = primoAddendo + secondoAddendo;
-        return numeratore + "/" + denominatore;
+
+        return (int) numeratore + "/" + denominatore;
     }
 
-    public double sommaFrazione2(Frazione frazione1, Frazione frazione2) {
-        if (frazione1.getDenominatore() == frazione2.getDenominatore()) {
-            return (double) (frazione1.getNumeratore() + frazione2.getNumeratore()) / frazione1.getDenominatore();
+
+    public String sommaFrazioneRitornaStringa(String frazioneInput) throws Exception {
+        Frazione frazione2 = new Frazione(frazioneInput);
+        return this.sommaFrazioneRitornaStringa(frazione2);
+    }
+
+
+    public String sommaFrazioneRitornaStringa(int numeratore, int denominatore) throws Exception {
+        Frazione frazione2 = new Frazione(numeratore, denominatore);
+        return this.sommaFrazioneRitornaStringa(frazione2);
+    }
+
+
+    private double sommaFrazioneRitornaValore(Frazione frazione2) {
+        if (this.denominatore == frazione2.getDenominatore()) {
+            return (double) (this.numeratore + frazione2.getNumeratore()) / this.denominatore;
         }
+
         int denominatore = 0;
         int i = 1;
         do {
-            if (i % frazione1.getDenominatore() == 0 && i % frazione2.getDenominatore() == 0) {
+            if (i % this.denominatore == 0 && i % frazione2.getDenominatore() == 0) {
                 denominatore = i;
             }
             i++;
         } while (denominatore == 0);
-        double primoAddendo = ((double) denominatore / frazione1.getDenominatore()) * frazione1.getNumeratore();
+
+        double primoAddendo = ((double) denominatore / this.denominatore) * this.numeratore;
         double secondoAddendo = ((double) denominatore / frazione2.getDenominatore()) * frazione2.getNumeratore();
         double numeratore = primoAddendo + secondoAddendo;
-        return numeratore/denominatore;
+
+        return numeratore / denominatore;
     }
 
-    @Override
-    public String toString() {
-        return "Risultato espresso in frazione: " + sommaFrazione() + "Risultato espresso in valore: " + sommaFrazione2();
+
+    public double sommaFrazioneRitornaValore(String frazioneInput) throws Exception {
+        Frazione frazione2 = new Frazione(frazioneInput);
+        return this.sommaFrazioneRitornaValore(frazione2);
+    }
+
+
+    public double sommaFrazioneRitornaValore(int numeratore, int denominatore) throws Exception {
+        Frazione frazione2 = new Frazione(numeratore, denominatore);
+        return this.sommaFrazioneRitornaValore(frazione2);
     }
 }
