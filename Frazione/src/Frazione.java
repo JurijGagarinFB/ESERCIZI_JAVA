@@ -31,7 +31,7 @@ public class Frazione {
                 continue;
             }
             if (!trovato) {
-                componentiDen.add(carattere - '0'); //uso -'0' perché in questo caso sto usando gli ascii. codice ascii dello 0 è 48. se ad esempio il numero è 1, 49-48 = 1.
+                componentiDen.add(carattere - '0'); //uso -'0' perché in questo caso sto usando gli ascii. codice ascii dello 0 è 48. se ad esempio il numero è 1, 49(codice ascii dell'1)-48 = 1.
             } else {
                 componentiNum.add(carattere - '0');
             }
@@ -85,13 +85,13 @@ public class Frazione {
 
     public String sommaFrazioneRitornaStringa(String frazioneInput) throws Exception {
         Frazione frazione2 = new Frazione(frazioneInput);
-        return this.sommaFrazioneRitornaStringa(frazione2);
+        return sommaFrazioneRitornaStringa(frazione2);
     }
 
 
     public String sommaFrazioneRitornaStringa(int numeratore, int denominatore) throws Exception {
         Frazione frazione2 = new Frazione(numeratore, denominatore);
-        return this.sommaFrazioneRitornaStringa(frazione2);
+        return sommaFrazioneRitornaStringa(frazione2);
     }
 
 
@@ -119,12 +119,12 @@ public class Frazione {
 
     public double sommaFrazioneRitornaValore(String frazioneInput) throws Exception {
         Frazione frazione2 = new Frazione(frazioneInput);
-        return this.sommaFrazioneRitornaValore(frazione2);
+        return sommaFrazioneRitornaValore(frazione2);
     }
 
 
     public double sommaFrazioneRitornaValore(int numeratore, int denominatore) throws Exception {
         Frazione frazione2 = new Frazione(numeratore, denominatore);
-        return this.sommaFrazioneRitornaValore(frazione2);
+        return sommaFrazioneRitornaValore(frazione2);
     }
 }
