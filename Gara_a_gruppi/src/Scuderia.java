@@ -1,46 +1,54 @@
-public class Scuderia implements Comparable{
-    private String nomescuderia;
-    private Pilota nomepilota;
-    private Integer nauto;
-    private int tempogiro;
+class Scuderia implements Comparable<Scuderia> {
+    private String nome;
+    private Pilota nPilota;
+    private int numAuto;
+    private int tGiro;
 
-    public Scuderia(String nomescuderia, Pilota nomepilota, int nauto) {
-        this.nomescuderia = nomescuderia;
-        this.nomepilota = nomepilota;
-        this.nauto = nauto;
+    public Scuderia(String nome, Pilota pilota, int numAuto) {
+        this.nome = nome;
+        this.nPilota = pilota;
+        this.numAuto = numAuto;
+        this.tGiro = 0;  // Inizialmente il tempo di giro è 0
     }
 
-    public String getNomescuderia() {
-        return nomescuderia;
+    public String getNome() {
+        return nome;
     }
 
-    public Pilota getNomepilota() {
-        return nomepilota;
+    public Pilota getPilota() {
+        return nPilota;
     }
 
-    public int getNauto() {
-        return nauto;
+    public void setTempoGiro(int tempGiro) {
+        this.tGiro = tempGiro;
     }
 
-    public int getTempogiro() {
-        return tempogiro;
+    public int getTempoGiro() {
+        return tGiro;
     }
 
     @Override
     public String toString() {
         return "Scuderia{" +
-                "nomescuderia='" + nomescuderia + '\'' +
-                ", nomepilota=" + nomepilota +
-                ", nauto=" + nauto +
-                ", tempogiro=" + tempogiro +
+                "nome='" + nome + '\'' +
+                ", pilota=" + nPilota.getNome() +
+                ", numAuto=" + numAuto +
+                ", tempoGiro=" + tGiro +
                 '}';
     }
 
-    public boolean equals(Scuderia s){
-
-    }
+    // Override del metodo equals per confrontare due scuderie
     @Override
-   public int compareto(Scuderia s){
-        this.nauto.compareTo(s.nauto);
-   }
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Scuderia scuderia = (Scuderia) obj;
+        return nome.equals(scuderia.nome);
+    }
+
+    // Metodo compareTo per ordinare le scuderie in base al tempo di giro
+    @Override
+    public int compareTo(Scuderia s) {
+        return Integer.compare(this.tGiro, s.tGiro);
+    }
 }
