@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static utility.Tools.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args){
         Scanner tastiera = new Scanner(System.in);
         boolean uscita = false;
         Gara gara = new Gara("Gran Premio", "Italia");
@@ -32,7 +32,7 @@ public class Main {
     }
 
     // Metodo per inserire piloti e scuderie
-    private static void inserisciPilotiEScuderie(Scanner tastiera, Gara gara) throws Exception {
+    private static void inserisciPilotiEScuderie(Scanner tastiera, Gara gara) {
         System.out.println("Inserimento piloti e scuderie");
         System.out.print("Da quante scuderie è composta la gara: ");
         int numScuderie = Integer.parseInt(tastiera.nextLine());
@@ -112,7 +112,7 @@ public class Main {
     }
 
     // Metodo per creare un pilota
-    public static Pilota metodoCreazionePilota(Scanner tastiera) throws Exception {
+    public static Pilota metodoCreazionePilota(Scanner tastiera){
         System.out.println("Inserisci il nome del pilota: ");
         String nome = tastiera.nextLine();
         System.out.println("Inserisci il cognome del pilota: ");
