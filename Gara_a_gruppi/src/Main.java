@@ -122,5 +122,6 @@ public class Main {
 
         // Restituisce un nuovo oggetto Pilota con i dati inseriti
         return new Pilota(nome, cognome, nazionalita);
+
     }
 }
