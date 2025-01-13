@@ -9,11 +9,15 @@ public class Libro {
     private final double costoPagina = 0.05;
     private Genere tipo;
 
-    public Libro(String autore, String titolo, int nPagine, Genere tipo) {
+    public Libro(String autore, String titolo, int nPagine, Genere tipo) throws Exception {
         this.autore = autore;
         this.titolo = titolo;
         this.nPagine = nPagine;
-        this.tipo = tipo;
+        try {
+            this.tipo = tipo;
+        } catch (Exception e) {
+            throw new Exception("Errore tipo");
+        }
     }
 
     public Libro(String autore, String titolo) {
@@ -46,12 +50,11 @@ public class Libro {
 
     @Override
     public String toString() {
-        return "Libro{" +
+        return "Libro: " +
                 "autore='" + autore + '\'' +
-                ", titolo='" + titolo + '\'' +
-                ", nPagine=" + nPagine +
-                ", tipo=" + tipo +
-                '}';
+                " - titolo='" + titolo + '\'' +
+                " - nPagine=" + nPagine +
+                " - tipo=" + tipo;
     }
 
     @Override

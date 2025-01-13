@@ -1,5 +1,6 @@
 package FRONTEND;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 import BACKEND.*;
@@ -52,14 +53,14 @@ public class Tools {
         return scelta;
     }
 
-    public static Libro leggiLibro(Scanner tastiera, boolean soluzioni) {
+    public static Libro leggiLibro(Scanner tastiera) throws Exception {
         System.out.println("Inserisci il l'autore: ");
         String autore = tastiera.nextLine();
         System.out.println("Inserisci il titolo: ");
         String titolo = tastiera.nextLine();
         System.out.println("Inserisci il numero di pagine: ");
-        int nPagine = tastiera.nextInt();
-        System.out.println("Inserisci il tipo: ");
+        int nPagine = Integer.parseInt(tastiera.nextLine());
+        System.out.println("Inserisci il tipo: " + Arrays.toString(Genere.values()));
         Genere tipo = Genere.valueOf(tastiera.nextLine().toUpperCase());
         return new Libro(autore, titolo, nPagine, tipo);
     }
