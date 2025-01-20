@@ -1,9 +1,10 @@
-package FRONTEND;
+package frontend;
 
-import java.util.Arrays;
+import backend.Genere;
+import backend.Libro;
+
+import java.util.ArrayList;
 import java.util.Scanner;
-
-import BACKEND.*;
 
 public class Tools {
     /*public static void main(String[] args) {
@@ -53,15 +54,33 @@ public class Tools {
         return scelta;
     }
 
-    public static Libro leggiLibro(Scanner tastiera) throws Exception {
-        System.out.println("Inserisci il l'autore: ");
+    public static Libro leggiLibro(Scanner tastiera, boolean soluzioni) {
+        Genere[] tipoGenere = Genere.values();
+        String[] sceltaGenere = {"GENERE", "ROMANZO", "MANUALE", "THRILLER", "GENERICO"};
+
+
+        System.out.print("Inserisci l'autore del libro: ");
         String autore = tastiera.nextLine();
-        System.out.println("Inserisci il titolo: ");
+        System.out.print("Inserisci il titolo del libro: ");
         String titolo = tastiera.nextLine();
-        System.out.println("Inserisci il numero di pagine: ");
+        System.out.print("Inserisci il numero di pagine del libro: ");
         int nPagine = Integer.parseInt(tastiera.nextLine());
-        System.out.println("Inserisci il tipo: " + Arrays.toString(Genere.values()));
-        Genere tipo = Genere.valueOf(tastiera.nextLine().toUpperCase());
+
+        System.out.println("Inserisci il tipo del libro: ");
+//         Menu(sceltaGenere, tastiera);
+        Genere tipo = tipoGenere[Menu(sceltaGenere, tastiera) - 1]; // visto che Menu parte da indice 1
+
+
+//        Libro l = new Libro(autore, titolo, nPagine, tipo);
+//        return l;
         return new Libro(autore, titolo, nPagine, tipo);
+
+    }
+
+    public static void visualizzaMensola(ArrayList<Libro> volumi) {
+        for (Libro l : volumi) {
+            clrScr();
+            System.out.println(l.toString());
+        }
     }
 }

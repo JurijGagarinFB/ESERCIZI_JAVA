@@ -1,8 +1,8 @@
-package BACKEND;
+package backend;
 
 public enum Genere {
     ROMANZO,
     MANUALE,
     THRILLER,
-    GENERICO
+    GENERICO;
 }
