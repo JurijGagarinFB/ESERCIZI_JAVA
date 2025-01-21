@@ -83,4 +83,23 @@ public class Tools {
             System.out.println(l.toString());
         }
     }
+
+    public String[] findFile(String[] directory, String fileExtension) {
+        String[] files = null;
+        if (directory.length == 0) {
+            return files;
+        }
+        int lunghezzaExt = fileExtension.length();
+        for (int i = 0; i < directory.length; i++) {
+            for (int j = directory[i].length()-1; j > directory[i].length()-lunghezzaExt; j--) {
+                if (directory[j].charAt(j) == fileExtension.charAt(j)) {
+
+                }
+            }
+        }
+    }
+
+    public int fileSelection(String[] findFile) {
+
+    }
 }
