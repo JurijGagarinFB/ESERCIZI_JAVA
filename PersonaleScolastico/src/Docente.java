@@ -31,9 +31,11 @@ public class Docente extends Dipendente {
 
     @Override
     public String toString() {
-        return "Docente{" +
-                "ruolo='" + getRuolo() + '\'' +
-                ", disciplina='" + disciplina + '\'' +
-                '}';
+        return String.format("%s - %c - %s - %.2f - %s - %s", super.getNominativo(), super.getGenere(), super.getIndirizzo(), getIncentivo(), ruolo, disciplina);
+    }
+
+    public String ritornaIndirizzoMaiuscolo() {
+//        return indirizzo.toUpperCase(); VIOLA L'INCAPSULAMENTO
+        return getIndirizzo().toUpperCase();
     }
 }

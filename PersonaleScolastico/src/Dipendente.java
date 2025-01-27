@@ -1,10 +1,11 @@
 import java.util.Objects;
 
 public class Dipendente {
-    //nominativo.genere,incentivo
+    //nominativo,genere,indirizzo,incentivo
     private final String nominativo;
     private final char genere;
-    private final String indirizzo;
+    // protected String indirizzo; VIOLA L'INCAPSULAMENTO
+    private String indirizzo;
     private final double incentivo = 0.50;
 
     public Dipendente(String nominativo, char genere, String indirizzo) {
@@ -25,23 +26,26 @@ public class Dipendente {
         return indirizzo;
     }
 
+    public void setIndirizzo(String indirizzo) {
+        this.indirizzo = indirizzo;
+    }
+
+//    public final double getIncentivo() {
+//        return incentivo;                   DOVESSIMO PORRE UN METODO RIDEFINITO IN UNA CLASSE FIGLIA COME FINAL, DAREBBE ERRORE, IN QUANTO I METODI FINAL NON POSSONO ESSERE RIDEFINITI CON OVERRIDE
+//    }
     public double getIncentivo() {
         return incentivo;
     }
 
     @Override
     public String toString() {
-        return "Dipendente{" +
-                "nominativo='" + nominativo + '\'' +
-                ", genere=" + genere +
-                ", indirizzo='" + indirizzo + '\'' +
-                ", incentivo=" + incentivo +
-                '}';
+        return String.format("%s - %c - %s - %.2f ", nominativo, genere, indirizzo, incentivo);
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Dipendente that)) return false;
-        return Objects.equals(getNominativo(), that.getNominativo());
+        if (this == o) return true;
+        if (!(o instanceof Dipendente d)) return false;
+        return this.getNominativo().equals(d.nominativo);
     }
 }
