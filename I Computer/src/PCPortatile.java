@@ -57,8 +57,7 @@ public class PCPortatile extends PC {
 
     @Override
     public String toString() {
-        return super.toString() + "PCPortatile [peso=" + peso + "Kg, altezza=" + altezza + "cm, larghezza=" +
-                larghezza + "cm, profondità=" + profondità + "cm, dimensioneVideo=" + dimensioneVideo + " pollici]\n";
+        return super.toString() + "PCPortatile [peso=" + peso + "Kg, altezza=" + altezza + "cm, larghezza=" + larghezza + "cm, profondità=" + profondità + "cm, dimensioneVideo=" + dimensioneVideo + " pollici]\n";
     }
 
     @Override
@@ -66,10 +65,6 @@ public class PCPortatile extends PC {
         if (!super.equals(obj)) return false;
         if (obj == null || !(obj instanceof PCPortatile)) return false;
         PCPortatile other = (PCPortatile) obj;
-        return Double.compare(this.peso, other.peso) == 0 &&
-                Double.compare(this.altezza, other.altezza) == 0 &&
-                Double.compare(this.larghezza, other.larghezza) == 0 &&
-                Double.compare(this.profondità, other.profondità) == 0 &&
-                Double.compare(this.dimensioneVideo, other.dimensioneVideo) == 0;
+        return Double.compare(this.peso, other.peso) == 0 && Double.compare(this.altezza, other.altezza) == 0 && Double.compare(this.larghezza, other.larghezza) == 0 && Double.compare(this.profondità, other.profondità) == 0 && Double.compare(this.dimensioneVideo, other.dimensioneVideo) == 0;
     }
 }

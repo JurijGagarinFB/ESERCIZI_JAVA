@@ -14,7 +14,6 @@ Sempre nella stessa classe Test verificare i meccanismi di up-casting e down-cas
 */
 
 
-
 // Classe di test
 public class Test {
     public static void main(String[] args) {
@@ -37,8 +36,7 @@ public class Test {
         System.out.println(server.toString());
 
         // Oggetto PCPortatile (Notebook)
-        PCPortatile notebook = new PCPortatile("Intel i7", 16, 512, "Apple", "MacBook Pro", "macOS",
-                1.8, 1.2, 30.4, 21.2, 13.3);
+        PCPortatile notebook = new PCPortatile("Intel i7", 16, 512, "Apple", "MacBook Pro", "macOS", 1.8, 1.2, 30.4, 21.2, 13.3);
         System.out.println(notebook.toString());
 
         // Esempio di equals

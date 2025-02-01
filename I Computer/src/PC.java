@@ -69,8 +69,7 @@ public class PC {
     // toString
     @Override
     public String toString() {
-        return "PC [processore=" + processore + ", ram=" + ram + "GB, memoria=" + memoria + "GB, marca=" + marca
-                + ", modello=" + modello + ", sistemaOperativo=" + sistemaOperativo + "]\n";
+        return "PC [processore=" + processore + ", ram=" + ram + "GB, memoria=" + memoria + "GB, marca=" + marca + ", modello=" + modello + ", sistemaOperativo=" + sistemaOperativo + "]\n";
     }
 
     // equals: due PC sono considerati uguali se hanno marca, modello e sistema operativo uguali (esempio)
