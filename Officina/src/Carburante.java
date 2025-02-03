@@ -1,0 +1,20 @@
+public enum Carburante {
+    METANO,
+    GASOLIO,
+    GPL,
+    BENZINA,
+    URANIO,
+    IDROGENO,
+    ELETTRICO,
+    DIESEL,
+    CARBONE,
+    AMICIZIA,
+    SPERANZA,
+    BESTEMMIE,
+    SOLE,
+    VENTO,
+    BIODIESEL,
+    ALCOOL,
+    ENERGIA_OSCURA,
+    SUCCHI_DI_FRUTTA
+}
