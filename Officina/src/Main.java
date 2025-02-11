@@ -26,11 +26,11 @@ public class Main {
 
         System.out.print("Inserisci prezzo: ");
         int prezzo = Integer.parseInt(sc.nextLine());
-
+        System.out.println("");
         Veicolo veicoloRicercato = new Veicolo(marca, modello, prezzo);
 
         try {
-            Veicolo trovato = Concessionaria.trovaVeicolo(c, veicoloRicercato);
+            Veicolo trovato = Concessionaria.trovaVeicolo(veicoloRicercato);
             System.out.println("Veicolo trovato: " + trovato);
         } catch (Exception e) {
             System.out.println(e.getMessage());

@@ -3,6 +3,7 @@ package frontend;
 import backend.Genere;
 import backend.Libro;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -77,29 +78,21 @@ public class Tools {
 
     }
 
-    public static void visualizzaMensola(ArrayList<Libro> volumi) {
-        for (Libro l : volumi) {
-            clrScr();
-            System.out.println(l.toString());
-        }
-    }
-
-    public String[] findFile(String[] directory, String fileExtension) {
-        String[] files = null;
-        if (directory.length == 0) {
-            return files;
-        }
-        int lunghezzaExt = fileExtension.length();
-        for (int i = 0; i < directory.length; i++) {
-            for (int j = directory[i].length()-1; j > directory[i].length()-lunghezzaExt; j--) {
-                if (directory[j].charAt(j) == fileExtension.charAt(j)) {
-
-                }
+    public static String[] findFile(String[] dir, String fileExt) {
+        String[] arr = new String[dir.length + 1];
+        arr[0] = "LISTA FILE " + fileExt;
+        int counter = 0;
+        for (String s : dir) {
+            if (s.endsWith(fileExt)) {
+                arr[++counter] = s;
             }
         }
+        String[] secondArr = new String[counter+1];
+        System.arraycopy(arr, 0, secondArr, 0, secondArr.length);
+        return secondArr;
     }
 
-    public int fileSelection(String[] findFile) {
-
+    public static int filesSelection(String[] findFile) {
+        return Menu(findFile, new Scanner(System.in));
     }
 }

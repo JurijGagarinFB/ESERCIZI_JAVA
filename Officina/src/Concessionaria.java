@@ -17,12 +17,11 @@ public class Concessionaria {
         return officina.size();
     }
 
-    public static Veicolo trovaVeicolo(Concessionaria c, Veicolo veicoloDaTrovare) throws Exception {
-        for (Veicolo v : c.getOfficina()) {
-            if (v.equals(veicoloDaTrovare)) {
-                return v;
-            }
+    public static int trovaVeicolo(Veicolo veicoloDaTrovare) throws Exception {
+        if (officina.contains(veicoloDaTrovare)) {
+            return officina.indexOf(veicoloDaTrovare);
+        }else{
+            throw new Exception("Veicolo non trovato");
         }
-        throw new Exception("Veicolo non trovato");
     }
 }
