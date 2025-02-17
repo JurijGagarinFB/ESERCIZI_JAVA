@@ -4,6 +4,6 @@ public class Main {
         while (!gara.isFineGara()) {
             gara.round();
         }
-        System.out.println(gara.getWinner());
+        System.out.println(gara.getVincitore());
     }
 }

@@ -19,7 +19,7 @@ public class Gara {
         return fineGara;
     }
 
-    public String getWinner() {
+    public String getVincitore() {
         if (!fineGara) {
             return "Partita in corso";
         }
@@ -60,12 +60,5 @@ public class Gara {
         if (roundCorrente >= roundTotali) {
             fineGara = true;
         }
-    }
-
-    public void resetGame() {
-        giocatore1 = new Giocatore(giocatore1.getNome());
-        giocatore2 = new Giocatore(giocatore2.getNome());
-        roundCorrente = 0;
-        fineGara = false;
     }
 }
