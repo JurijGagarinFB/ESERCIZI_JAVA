@@ -19,7 +19,7 @@ public class Gara {
         return fineGara;
     }
 
-    public String getVincitore() {
+    public String getWinner() {
         if (!fineGara) {
             return "Partita in corso";
         }
@@ -32,33 +32,30 @@ public class Gara {
         }
     }
 
-    public void round() {
+    public String round() {
         if (fineGara) {
-            return;
+            return "La gara è già finita.";
         }
         int lancio1 = dado.lancia();
         int lancio2 = dado.lancia();
 
-        System.out.println("-------------------------------------------------");
-        System.out.println(giocatore1.getNome() + " ha lanciato: " + lancio1);
-        System.out.println(giocatore2.getNome() + " ha lanciato: " + lancio2);
-        System.out.println("Round numero: " + (roundCorrente+1));
+        String risultato = "-----------------------\n" +
+                giocatore1.getNome() + " ha lanciato: " + lancio1 + "\n" + Dado.dado(lancio1) + "\n" +
+                giocatore2.getNome() + " ha lanciato: " + lancio2 + "\n" + Dado.dado(lancio2);
 
         if (lancio1 > lancio2) {
             giocatore1.incrementaVittorie();
-            System.out.println("Round vinto da giocatore1");
         } else if (lancio2 > lancio1) {
             giocatore2.incrementaVittorie();
-            System.out.println("Round vinto da giocatore2");
         } else {
             giocatore1.incrementaVittorie();
             giocatore2.incrementaVittorie();
-            System.out.println("Pareggio");
         }
 
         roundCorrente++;
         if (roundCorrente >= roundTotali) {
             fineGara = true;
         }
+        return risultato;
     }
 }
