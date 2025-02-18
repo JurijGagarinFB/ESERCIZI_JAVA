@@ -40,8 +40,8 @@ public class Gara {
         int lancio2 = dado.lancia();
 
         String risultato = "-----------------------\n" +
-                giocatore1.getNome() + " ha lanciato: " + lancio1 + "\n" + dado.lanciaDado(lancio1) + "\n" +
-                giocatore2.getNome() + " ha lanciato: " + lancio2 + "\n" + dado.lanciaDado(lancio2);
+                giocatore1.getNome() + " ha lanciato: " + lancio1 + "\n" + dado.stampaFacce(lancio1) + "\n" +
+                giocatore2.getNome() + " ha lanciato: " + lancio2 + "\n" + dado.stampaFacce(lancio2);
 
         if (lancio1 > lancio2) {
             giocatore1.incrementaVittorie();

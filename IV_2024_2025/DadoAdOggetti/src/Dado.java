@@ -13,7 +13,7 @@ public class Dado {
         return random.nextInt(nFacce) + 1;
     }
 
-    public String lanciaDado(int faccia) {
+    public String stampaFacce(int faccia) {
         if (this.nFacce == 6){
             return switch (faccia) {
                 case 1 -> "\t\t\t\t ╔════════╗\n"
