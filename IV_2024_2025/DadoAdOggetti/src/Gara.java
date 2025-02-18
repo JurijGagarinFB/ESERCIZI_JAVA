@@ -24,9 +24,9 @@ public class Gara {
             return "Partita in corso";
         }
         if (giocatore1.getVittorie() > giocatore2.getVittorie()) {
-            return "Vincitore: " + giocatore1.getNome() + " con " + giocatore1.getVittorie() + " punti";
+            return "Vincitore: " + giocatore1.getNome() + " con " + giocatore1.getVittorie() + " round vinti su " + roundTotali;
         } else if (giocatore2.getVittorie() > giocatore1.getVittorie()) {
-            return "Vincitore: " + giocatore2.getNome() + " con " + giocatore2.getVittorie() + " punti";
+            return "Vincitore: " + giocatore2.getNome() + " con " + giocatore2.getVittorie() + " round vinti su " + roundTotali;
         } else {
             return "La partita è finita in parità";
         }
@@ -40,8 +40,8 @@ public class Gara {
         int lancio2 = dado.lancia();
 
         String risultato = "-----------------------\n" +
-                giocatore1.getNome() + " ha lanciato: " + lancio1 + "\n" + Dado.dado(lancio1) + "\n" +
-                giocatore2.getNome() + " ha lanciato: " + lancio2 + "\n" + Dado.dado(lancio2);
+                giocatore1.getNome() + " ha lanciato: " + lancio1 + "\n" + dado.lanciaDado(lancio1) + "\n" +
+                giocatore2.getNome() + " ha lanciato: " + lancio2 + "\n" + dado.lanciaDado(lancio2);
 
         if (lancio1 > lancio2) {
             giocatore1.incrementaVittorie();

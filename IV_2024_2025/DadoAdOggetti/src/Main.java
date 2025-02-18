@@ -11,6 +11,7 @@ public class Main {
         int numeroRound = Integer.parseInt(sc.nextLine());
         System.out.println("Inserire numero di facce dei dadi: ");
         int numeroFacce = Integer.parseInt(sc.nextLine());
+
         Gara gara = new Gara(nome1, nome2, numeroRound, new Dado(numeroFacce));
         while (!gara.isFineGara()) {
             System.out.println(gara.round());
