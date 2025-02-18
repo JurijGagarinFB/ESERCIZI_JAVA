@@ -7,10 +7,17 @@ public class Main {
         String nome1 = sc.nextLine();
         System.out.println("Inserire nome Giocatore 2: ");
         String nome2 = sc.nextLine();
-        System.out.println("Inserire numero di round: ");
-        int numeroRound = Integer.parseInt(sc.nextLine());
-        System.out.println("Inserire numero di facce dei dadi: ");
-        int numeroFacce = Integer.parseInt(sc.nextLine());
+
+        int numeroRound;
+        int numeroFacce;
+        do {
+            System.out.println("Inserire numero di round: ");
+            numeroRound = Integer.parseInt(sc.nextLine());
+        } while (numeroRound < 1);
+        do {
+            System.out.println("Inserire numero di facce dei dadi: ");
+            numeroFacce = Integer.parseInt(sc.nextLine());
+        } while (numeroFacce <= 1);
 
         Gara gara = new Gara(nome1, nome2, numeroRound, new Dado(numeroFacce));
         while (!gara.isFineGara()) {
@@ -22,7 +29,7 @@ public class Main {
 
     public static void attesa(int x) {
         try {
-            Thread.sleep(1000*x);
+            Thread.sleep(1000 * x);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
