@@ -1,9 +1,29 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        Gara gara = new Gara("Giocatore1", "Giocatore2", 5);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Inserire nome Giocatore 1: ");
+        String nome1 = sc.nextLine();
+        System.out.println("Inserire nome Giocatore 2: ");
+        String nome2 = sc.nextLine();
+        System.out.println("Inserire numero di round: ");
+        int numeroRound = Integer.parseInt(sc.nextLine());
+        System.out.println("Inserire numero di facce dei dadi: ");
+        int numeroFacce = Integer.parseInt(sc.nextLine());
+        Gara gara = new Gara(nome1, nome2, numeroRound, new Dado(numeroFacce));
         while (!gara.isFineGara()) {
             System.out.println(gara.round());
+            attesa(2);
         }
-        System.out.println(gara.getWinner());
+        System.out.println(gara.getVincitore());
+    }
+
+    public static void attesa(int x) {
+        try {
+            Thread.sleep(1000*x);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

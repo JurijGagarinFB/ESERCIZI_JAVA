@@ -1,11 +1,12 @@
 import java.util.Random;
 
 public class Dado {
-    private int nFacce = 6;
+    private int nFacce;
     private Random random;
 
-    public Dado() {
+    public Dado(int numeroFacce) {
         random = new Random();
+        this.nFacce = numeroFacce;
     }
 
     public int lancia() {
@@ -46,5 +47,6 @@ public class Dado {
                     + "\t\t\t\t ╚════════╝";
             default: return "Valore non valido";
         }
+        //facce-6=n  if n<6 print faccia
     }
 }

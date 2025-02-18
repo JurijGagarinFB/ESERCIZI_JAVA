@@ -6,10 +6,10 @@ public class Gara {
     private int roundCorrente;
     private boolean fineGara;
 
-    public Gara(String nome1, String nome2, int roundTotali) {
+    public Gara(String nome1, String nome2, int roundTotali, Dado dado) {
         this.giocatore1 = new Giocatore(nome1);
         this.giocatore2 = new Giocatore(nome2);
-        this.dado = new Dado();
+        this.dado = dado;
         this.roundTotali = roundTotali;
         this.roundCorrente = 0;
         this.fineGara = false;
@@ -19,14 +19,14 @@ public class Gara {
         return fineGara;
     }
 
-    public String getWinner() {
+    public String getVincitore() {
         if (!fineGara) {
             return "Partita in corso";
         }
         if (giocatore1.getVittorie() > giocatore2.getVittorie()) {
-            return "Vincitore: " + giocatore1.getNome();
+            return "Vincitore: " + giocatore1.getNome() + " con " + giocatore1.getVittorie() + " punti";
         } else if (giocatore2.getVittorie() > giocatore1.getVittorie()) {
-            return "Vincitore: " + giocatore2.getNome();
+            return "Vincitore: " + giocatore2.getNome() + " con " + giocatore2.getVittorie() + " punti";
         } else {
             return "La partita è finita in parità";
         }
