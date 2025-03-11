@@ -1,9 +1,9 @@
-abstract public class ProdottoElettronico {
-    private int codice;
-    private String marca;
-    private double prezzo;
+public abstract class ProdottoElettronico {
+    protected int codice;
+    protected String marca;
+    protected double prezzo;
 
-    public ProdottoElettronico(int codice, String marca, double prezzo) throws IllegalArgumentException {
+    public ProdottoElettronico(int codice, String marca, double prezzo) {
         if (prezzo <= 0) throw new IllegalArgumentException("Il prezzo deve essere maggiore di 0.");
         this.codice = codice;
         this.marca = marca;
@@ -22,7 +22,7 @@ abstract public class ProdottoElettronico {
         return prezzo;
     }
 
-    public void setPrezzo(double prezzo) throws IllegalArgumentException {
+    public void setPrezzo(double prezzo) {
         if (prezzo <= 0) throw new IllegalArgumentException("Il prezzo deve essere maggiore di 0.");
         this.prezzo = prezzo;
     }
