@@ -11,6 +11,7 @@ public class GalleriaDeiSolidi {
         galleria.add(s.clone());
     }
 
+
     public ArrayList<Solido> getGalleria() throws CloneNotSupportedException {
         ArrayList<Solido> lista = new ArrayList<>();
         for (Solido s : galleria) {
