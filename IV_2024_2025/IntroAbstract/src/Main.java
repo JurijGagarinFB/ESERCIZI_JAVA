@@ -6,11 +6,11 @@ public class Main {
         Cubo c1 = new Cubo(4, 2);
 
         GalleriaDeiSolidi galleria = new GalleriaDeiSolidi();
-        ArrayList<Solido> lista;
+
         try{
             galleria.addSolido(s1);
             galleria.addSolido(c1);
-            lista.forEach((System.out::println));
+            galleria.getGalleria().forEach(System.out::println);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
