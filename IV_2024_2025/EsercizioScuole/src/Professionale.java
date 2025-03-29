@@ -1,5 +1,5 @@
 // Istituti Professionali
-class Professionale extends Tecnico {
+public class Professionale extends Tecnico {
     private final double CONTRIBUTO_REGIONALE = 2400;
     private final double CONTRIBUTO_LABORATORIO_PROF = 3000;
 
